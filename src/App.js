@@ -1,26 +1,23 @@
-function Food({name,picture}){
-  return(
-    <div>
-      <h3>I like {name}!!!!</h3>
-      <img src={picture} alt={name}/>
-    </div>
-    
-  )
-}
+import PropTypes from "prop-types"
+import React from "react";
 
-// id를 통해 react가 컴포넌트가 각각 다르다는걸 알게 함.
-const foodILIKE = [{id:1,name:"kimchi",image:"https://www.maangchi.com/wp-content/uploads/2015/07/tongbaechu-kimchi.jpg"},
-{id:2,name:"pizza",image:"https://i.ytimg.com/vi/P-Ojv_1veCg/maxresdefault.jpg"},
-{id:3,name:"chicken",image:"https://cdn0.wideopeneats.com/wp-content/uploads/2016/10/FriedChicken-950x535.jpeg"}];
-
-function App() {
-  return (
-    <div className="App">
-      <h1>Hi there!!</h1>
-      {foodILIKE.map(dish => (
-      <Food key={dish.id} name={dish.name} picture={dish.image}/>))}
+class App extends React.Component{
+  state = {
+    count: 0
+  };
+  add = () => {
+    this.setState(current => ({count: current.count + 1})); // setState를 사용해야 render가 refresh 된다.
+  };
+  remove = () => {
+    this.setState(current => ({count: current.count - 1}));
+  };
+  render(){
+    return <div>
+      <h1>the number count is: {this.state.count}</h1>
+      <button onClick={this.add}>Add</button>
+      <button onClick={this.remove}>Remove</button>
     </div>
-  );
+  }
 }
 
 export default App;
